@@ -45,3 +45,7 @@ exports.Login = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.GetCurrent = (req, res) => {
+  res.status(200).send({ user: req.user });
+};

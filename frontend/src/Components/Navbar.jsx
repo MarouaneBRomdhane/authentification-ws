@@ -1,9 +1,19 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetCurrent } from "../redux/Action";
+
 
 function NavBar() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(GetCurrent());
+  }, [dispatch]);
+
+  const User = useSelector((state) => state.user);
+  console.log(User);
   return (
     <Navbar className="bg-dark">
       <Container>

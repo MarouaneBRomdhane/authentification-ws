@@ -4,18 +4,23 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import "./ComponentStyle.css";
 import { useDispatch } from "react-redux";
-import { Login_action } from "../redux/Action";
-import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+import { Register_action } from "../redux/Action";
+
+const Register = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [Name, setName] = useState("");
 
   const dispatch = useDispatch();
+
   const Navigate = useNavigate();
-  const handleLogin = () => {
-    dispatch(Login_action({ Email, Password }, Navigate));
+
+  const HandleRegister = () => {
+    dispatch(Register_action({ Email, Password, Name }, Navigate));
   };
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
@@ -35,18 +40,29 @@ const Login = () => {
               color: "#FFF7D6",
             }}
           >
-            <h1>Connexion </h1>
+            <h1>Register </h1>
           </Card.Title>
           <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label style={{ color: "#FFF7D6", fontSize: "25px" }}>
+                Nom d'utlisateur
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Taper votre Nom d'utilisateur"
+                autoFocus
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label style={{ color: "#FFF7D6", fontSize: "25px" }}>
                 Email
               </Form.Label>
               <Form.Control
-                onChange={(e) => setEmail(e.target.value)}
-                type="text"
+                type="email"
                 placeholder="Taper votre Email"
                 autoFocus
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Form.Group
@@ -57,14 +73,14 @@ const Login = () => {
                 Mot de passe
               </Form.Label>
               <Form.Control
-                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 placeholder="Taper votre mot de passe"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
           </Form>
-          <Button className="validation-btn-connexion" onClick={handleLogin}>
-            Se connecter
+          <Button className="validation-btn-connexion" onClick={HandleRegister}>
+            Register
           </Button>
         </Card.Body>
       </Card>
@@ -72,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
